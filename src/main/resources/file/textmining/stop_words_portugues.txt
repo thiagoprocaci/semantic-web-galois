@@ -22,11 +22,9 @@ as
 dos
 como
 mas
-foi
 ao
 ele
 das
-tem
 à
 seu
 sua
@@ -34,7 +32,6 @@ ou
 ser
 quando
 muito
-há
 nos
 já
 está
@@ -59,10 +56,7 @@ nas
 me
 esse
 eles
-estão
 você
-tinha
-foram
 essa
 num
 nem
@@ -75,11 +69,8 @@ numa
 pelos
 elas
 havia
-seja
 qual
-será
 nós
-tenho
 lhe
 deles
 essas
@@ -115,7 +106,6 @@ aquelas
 isto
 aquilo
 estou
-está
 estamos
 estão
 estive
@@ -164,7 +154,6 @@ houveriam
 sou
 somos
 são
-era
 éramos
 eram
 fui
@@ -176,7 +165,6 @@ fôramos
 seja
 sejamos
 sejam
-fosse
 fôssemos
 fossem
 for
