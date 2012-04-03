@@ -26,4 +26,13 @@ public interface IFileModule {
 	 */
 	File merge(String filePath1, String filePath2);
 
+	/**
+     * Extrai texto de um arquivo
+     *
+     * @param filePath
+     *            caminho do arquivo
+     * @return Retorna string com o texto do arquivo
+     */
+    String extractTextFromFile(String filePath);
+
 }

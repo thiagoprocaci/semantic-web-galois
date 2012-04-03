@@ -17,23 +17,25 @@ import com.semanticweb.framework.module.file.support.IFileNameGenerator;
 import com.semanticweb.support.FileUtil;
 
 public class PdfFileTransformerTest {
-    private static final String FILE_NAME = "fileName";
+    private static final String FILE_NAME = "fileName.pdf";
     private PdfFileTransformer pdfFileTransformer;
     private IFileNameGenerator fileNameGenerator;
+    private FileUtil fileUtil;
 
     @Before
     public void doBefore() {
+        fileUtil = new FileUtil();
         pdfFileTransformer = new PdfFileTransformer();
         fileNameGenerator = mock(IFileNameGenerator.class);
-        String folder = FileUtil.getAbsolutePath("/files/");
+        String folder = fileUtil.getAbsolutePath("/files/");
         pdfFileTransformer.setPdfFolder(folder);
         pdfFileTransformer.setFileNameGenerator(fileNameGenerator);
-        when(fileNameGenerator.generateName(folder)).thenReturn(FILE_NAME);
+        when(fileNameGenerator.generateName(folder)).thenReturn(folder + FILE_NAME);
     }
 
     @Test
     public void testSplit() {
-        String path = FileUtil.getAbsolutePath("/files/cibercultura.pdf");
+        String path = fileUtil.getAbsolutePath("/files/cibercultura.pdf");
         File file = pdfFileTransformer.split(path, 3, 10);
         assertNotNull(file);
         assertTrue(file.exists());
@@ -51,8 +53,8 @@ public class PdfFileTransformerTest {
 
     @Test
     public void testMerge() {
-        String path = FileUtil.getAbsolutePath("/files/cibercultura.pdf");
-        String path2 = FileUtil.getAbsolutePath("/files/OntoWS.pdf");
+        String path = fileUtil.getAbsolutePath("/files/cibercultura.pdf");
+        String path2 = fileUtil.getAbsolutePath("/files/OntoWS.pdf");
         File file = pdfFileTransformer.merge(path, path2);
         assertNotNull(file);
         assertTrue(file.exists());

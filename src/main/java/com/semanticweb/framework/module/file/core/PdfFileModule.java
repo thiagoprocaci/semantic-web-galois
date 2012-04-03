@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.semanticweb.framework.module.file.IFileModule;
 import com.semanticweb.framework.module.file.support.IFileTransformer;
+import com.semanticweb.framework.module.file.support.ITextFileExtractor;
 
 /**
  *
@@ -12,7 +13,12 @@ import com.semanticweb.framework.module.file.support.IFileTransformer;
  */
 public class PdfFileModule implements IFileModule {
     private IFileTransformer fileTransformer;
+    private ITextFileExtractor textFileExtractor;
 
+
+    public void setTextFileExtractor(ITextFileExtractor textFileExtractor) {
+        this.textFileExtractor = textFileExtractor;
+    }
 
     public void setFileTransformer(IFileTransformer fileTransformer) {
         this.fileTransformer = fileTransformer;
@@ -32,6 +38,14 @@ public class PdfFileModule implements IFileModule {
     @Override
     public File merge(String filePath1, String filePath2) {
        return fileTransformer.merge(filePath1, filePath2);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String extractTextFromFile(String filePath) {
+        return textFileExtractor.extractTextFromFile(filePath);
     }
 
 
