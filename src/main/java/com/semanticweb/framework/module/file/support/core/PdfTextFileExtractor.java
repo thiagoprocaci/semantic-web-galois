@@ -32,8 +32,10 @@ public class PdfTextFileExtractor implements ITextFileExtractor {
             String text = stripper.getText(new PDDocument(cd));
             return text.trim();
         } catch (FileNotFoundException e) {
+            // TODO colocar log
             System.out.println("error: " + e.getMessage());
         } catch (IOException e) {
+            // TODO colocar log
             System.out.println("error: " + e.getMessage());
         }
         return null;

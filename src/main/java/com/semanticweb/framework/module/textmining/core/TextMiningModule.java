@@ -35,6 +35,7 @@ public class TextMiningModule implements ITextMiningModule {
                 }
             }
         } catch (FileNotFoundException e) {
+            // TODO colocar log
             System.out.println("error: " + e.getMessage());
         }
         return stopWords;
