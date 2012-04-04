@@ -13,6 +13,8 @@ import com.semanticweb.framework.module.textmining.support.IStopWordManager;
  */
 public class StopWordManager implements IStopWordManager {
     private String stopWordsFilePath;
+    // cache das stop words
+    private Set<String> stopWords;
 
     public void setStopWordsFilePath(String stopWordsFilePath) {
         this.stopWordsFilePath = stopWordsFilePath;
@@ -23,23 +25,33 @@ public class StopWordManager implements IStopWordManager {
      */
     @Override
     public Set<String> loadStopWords() {
-        Set<String> stopWords = new HashSet<String>();
-        try {
-            Scanner scanner = new Scanner(new File(stopWordsFilePath));
-            String string = null;
-            while (scanner.hasNext()) {
-                string = scanner.nextLine();
-                if (string != null) {
-                    string = string.trim();
-                    if (string.length() > 0) {
-                        stopWords.add(string.trim());
+        if (stopWords == null) {
+            stopWords = new HashSet<String>();
+            try {
+                Scanner scanner = new Scanner(new File(stopWordsFilePath));
+                String string = null;
+                while (scanner.hasNext()) {
+                    string = scanner.nextLine();
+                    if (string != null) {
+                        string = string.trim();
+                        if (string.length() > 0) {
+                            stopWords.add(string.trim());
+                        }
                     }
                 }
+            } catch (FileNotFoundException e) {
+                // TODO colocar log
+                System.out.println("error: " + e.getMessage());
             }
-        } catch (FileNotFoundException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
         }
         return stopWords;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isStopWord(String word) {       
+        return loadStopWords().contains(word);
     }
 }

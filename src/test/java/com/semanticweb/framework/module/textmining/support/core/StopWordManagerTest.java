@@ -1,7 +1,9 @@
 package com.semanticweb.framework.module.textmining.support.core;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -29,5 +31,13 @@ public class StopWordManagerTest {
         for (String string : stopWords) {
             assertNotNull(string);
         }
+    }
+    
+    @Test
+    public void testsStopWord() {
+        assertTrue(stopWordManager.isStopWord("de"));
+        assertTrue(stopWordManager.isStopWord("para"));
+        assertTrue(stopWordManager.isStopWord("a"));
+        assertFalse(stopWordManager.isStopWord("ontologia"));
     }
 }
