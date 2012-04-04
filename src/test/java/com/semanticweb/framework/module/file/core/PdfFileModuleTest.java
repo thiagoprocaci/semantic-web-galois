@@ -32,7 +32,7 @@ public class PdfFileModuleTest {
 
     @Test
     public void testSplit() {
-        String path = fileUtil.getAbsolutePath("/files/cibercultura.pdf");
+        String path = fileUtil.getAbsolutePath(FileUtil.CIBERCULTURA_FILE);
         File file = new File(path);
         int startPage = 1;
         int endPage = 10;
@@ -45,7 +45,7 @@ public class PdfFileModuleTest {
 
     @Test
     public void testMerge() {
-        String path = fileUtil.getAbsolutePath("/files/cibercultura.pdf");
+        String path = fileUtil.getAbsolutePath(FileUtil.CIBERCULTURA_FILE);
         File file = new File(path);
         String filePath = "filePath";
         String filePath2 = "filePath2";

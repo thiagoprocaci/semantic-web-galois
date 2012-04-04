@@ -27,7 +27,7 @@ public class PdfFileTransformerTest {
         fileUtil = new FileUtil();
         pdfFileTransformer = new PdfFileTransformer();
         fileNameGenerator = mock(IFileNameGenerator.class);
-        String folder = fileUtil.getAbsolutePath("/files/");
+        String folder = fileUtil.getAbsolutePath(FileUtil.FILE_FOLDER);
         pdfFileTransformer.setPdfFolder(folder);
         pdfFileTransformer.setFileNameGenerator(fileNameGenerator);
         when(fileNameGenerator.generateName(folder)).thenReturn(folder + FILE_NAME);
@@ -35,7 +35,7 @@ public class PdfFileTransformerTest {
 
     @Test
     public void testSplit() {
-        String path = fileUtil.getAbsolutePath("/files/cibercultura.pdf");
+        String path = fileUtil.getAbsolutePath(FileUtil.CIBERCULTURA_FILE);
         File file = pdfFileTransformer.split(path, 3, 10);
         assertNotNull(file);
         assertTrue(file.exists());
@@ -48,13 +48,13 @@ public class PdfFileTransformerTest {
             fail(e.getMessage());
         }
         assertNull(pdfFileTransformer.split("", 1, 2));
-        assertNull(pdfFileTransformer.split("/files/a.txt", 1, 2));
+        assertNull(pdfFileTransformer.split(FileUtil.A_TXT_FILE, 1, 2));
     }
 
     @Test
     public void testMerge() {
-        String path = fileUtil.getAbsolutePath("/files/cibercultura.pdf");
-        String path2 = fileUtil.getAbsolutePath("/files/OntoWS.pdf");
+        String path = fileUtil.getAbsolutePath(FileUtil.CIBERCULTURA_FILE);
+        String path2 = fileUtil.getAbsolutePath(FileUtil.ONTO_WS_FILE);
         File file = pdfFileTransformer.merge(path, path2);
         assertNotNull(file);
         assertTrue(file.exists());
@@ -67,7 +67,7 @@ public class PdfFileTransformerTest {
             fail(e.getMessage());
         }
         assertNull(pdfFileTransformer.merge("", ""));
-        assertNull(pdfFileTransformer.merge("/files/a.txt", "/files/OntoWS.pdf"));
-        assertNull(pdfFileTransformer.merge("/files/OntoWS.pdf", "/files/a.txt"));
+        assertNull(pdfFileTransformer.merge(FileUtil.A_TXT_FILE, FileUtil.ONTO_WS_FILE));
+        assertNull(pdfFileTransformer.merge(FileUtil.ONTO_WS_FILE, FileUtil.A_TXT_FILE));
     }
 }
