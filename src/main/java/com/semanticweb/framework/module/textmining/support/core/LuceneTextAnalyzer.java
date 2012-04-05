@@ -43,35 +43,39 @@ public class LuceneTextAnalyzer implements ITextAnalyzer {
     @Override
     public Map<String, Integer> tokenize(String text) {
         Map<String, Integer> result = new HashMap<String, Integer>();
-        try {
-            // carrega todas as stop eords
-            Set<String> stopWords = new HashSet<String>();
-            for (IStopWordManager stopWordManager : stopWordManagerList) {
-                stopWords.addAll(stopWordManager.loadStopWords());
-            }
-            // inicializa o analisador
-            Analyzer analyzer = null;
-            if (analizerType != null && analizerType.equals(BRAZILIAN_ANALYZER)) {
-                analyzer = new BrazilianAnalyzer(Version.LUCENE_35, stopWords);
-            } else {
-                analyzer = new StandardAnalyzer(Version.LUCENE_35, stopWords);
-            }
-            TokenStream stream = analyzer.tokenStream(null, new StringReader(text));
-            String key = null;
-            while (stream.incrementToken()) {
-                key = stream.getAttribute(CharTermAttribute.class).toString();
-                if (key != null && key.length() > 2) {
-                    if (result.containsKey(key)) {
-                        result.put(key, result.get(key) + 1);
-                    } else {
-                        result.put(key, 1);
+        if (text != null) {
+            try {
+                // carrega todas as stop words
+                Set<String> stopWords = new HashSet<String>();
+                for (IStopWordManager stopWordManager : stopWordManagerList) {
+                    stopWords.addAll(stopWordManager.loadStopWords());
+                }
+                // inicializa o analisador
+                Analyzer analyzer = null;
+                if (analizerType != null && analizerType.equals(BRAZILIAN_ANALYZER)) {
+                    analyzer = new BrazilianAnalyzer(Version.LUCENE_35, stopWords);
+                } else {
+                    analyzer = new StandardAnalyzer(Version.LUCENE_35, stopWords);
+                }
+                TokenStream stream = analyzer.tokenStream(null, new StringReader(text));
+                String key = null;
+                while (stream.incrementToken()) {
+                    key = stream.getAttribute(CharTermAttribute.class).toString();
+                    if (key != null && key.length() > 2 && !key.contains(":") && !key.contains("_")) {
+                        if (result.containsKey(key)) {
+                            result.put(key, result.get(key) + 1);
+                        } else {
+                            result.put(key, 1);
+                        }
                     }
                 }
+            } catch (IOException e) {
+                // not thrown b/c we're using a string reader...
+                throw new RuntimeException(e);
             }
-        } catch (IOException e) {
-            // not thrown b/c we're using a string reader...
-            throw new RuntimeException(e);
         }
         return result;
     }
+
+
 }

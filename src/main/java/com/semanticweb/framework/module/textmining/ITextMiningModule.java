@@ -1,6 +1,8 @@
 package com.semanticweb.framework.module.textmining;
 
-import java.util.Set;
+import java.util.List;
+
+import com.semanticweb.framework.module.textmining.model.KeyWordSet;
 
 /**
  *
@@ -10,7 +12,8 @@ public interface ITextMiningModule {
 
 
     /**
-     * @return Retorna lista de stop words
+     *
+     * @return Retorna melhores chaves que descrevem um arquivo
      */
-    Set<String> loadStopWords();
+    List<KeyWordSet> suggestKeyWords(String filePath);
 }

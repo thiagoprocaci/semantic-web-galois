@@ -1,26 +1,34 @@
 package com.semanticweb.framework.module.textmining.core;
 
-import java.util.Set;
+import java.util.List;
 
+import com.semanticweb.framework.module.file.IFileModule;
 import com.semanticweb.framework.module.textmining.ITextMiningModule;
-import com.semanticweb.framework.module.textmining.support.IStopWordManager;
+import com.semanticweb.framework.module.textmining.model.KeyWordSet;
+import com.semanticweb.framework.module.textmining.support.IMetadataAdvisor;
 
 /**
- * 
  * Modulo de mineracao de texto
  */
 public class TextMiningModule implements ITextMiningModule {
-    private IStopWordManager stopWordManager;
+    private IFileModule fileModule;
+    private IMetadataAdvisor metadataAdvisor;
 
-    public void setStopWordManager(IStopWordManager stopWordManager) {
-        this.stopWordManager = stopWordManager;
+    public void setFileModule(IFileModule fileModule) {
+        this.fileModule = fileModule;
+    }
+
+    public void setMetadataAdvisor(IMetadataAdvisor metadataAdvisor) {
+        this.metadataAdvisor = metadataAdvisor;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Set<String> loadStopWords() {
-        return stopWordManager.loadStopWords();
+    public List<KeyWordSet> suggestKeyWords(String filePath) {
+        String text = fileModule.extractTextFromFile(filePath);
+        return metadataAdvisor.suggestKeyWords(text);
     }
+
 }
