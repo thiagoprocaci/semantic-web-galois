@@ -11,6 +11,7 @@ import com.semanticweb.framework.module.textmining.support.IMetadataAdvisor;
  * Modulo de mineracao de texto
  */
 public class TextMiningModule implements ITextMiningModule {
+    private static final long serialVersionUID = 1L;
     private IFileModule fileModule;
     private IMetadataAdvisor metadataAdvisor;
 
@@ -31,4 +32,11 @@ public class TextMiningModule implements ITextMiningModule {
         return metadataAdvisor.suggestKeyWords(text);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initialize() {
+        // TODO log
+    }
 }

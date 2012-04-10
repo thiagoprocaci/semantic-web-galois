@@ -2,12 +2,14 @@ package com.semanticweb.framework.module.file;
 
 import java.io.File;
 
+import com.semanticweb.framework.kernel.IKernelModule;
+
 /**
  *
  * Modulo manipulador de arquivos
  *
  */
-public interface IFileModule {
+public interface IFileModule extends IKernelModule {
 
 	/**
 	 *  Divide um arquivo

@@ -12,6 +12,7 @@ import com.semanticweb.framework.module.file.support.ITextFileExtractor;
  *
  */
 public class PdfFileModule implements IFileModule {
+    private static final long serialVersionUID = 1L;
     private IFileTransformer fileTransformer;
     private ITextFileExtractor textFileExtractor;
 
@@ -46,6 +47,14 @@ public class PdfFileModule implements IFileModule {
     @Override
     public String extractTextFromFile(String filePath) {
         return textFileExtractor.extractTextFromFile(filePath);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initialize() {
+        // TODO log
     }
 
 
