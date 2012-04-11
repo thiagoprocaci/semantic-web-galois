@@ -9,6 +9,8 @@ import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.semanticweb.framework.module.file.support.ITextFileExtractor;
 
@@ -17,6 +19,7 @@ import com.semanticweb.framework.module.file.support.ITextFileExtractor;
 * Extrator de texto de um arquivo pdf
 */
 public class PdfTextFileExtractor implements ITextFileExtractor {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PdfTextFileExtractor.class);
 
     /**
      * {@inheritDoc}
@@ -32,11 +35,9 @@ public class PdfTextFileExtractor implements ITextFileExtractor {
             String text = stripper.getText(new PDDocument(cd));
             return text.trim();
         } catch (FileNotFoundException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
+            LOGGER.error("error: " + e.getMessage());
         } catch (IOException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
+            LOGGER.error("error: " + e.getMessage());
         }
         return null;
     }

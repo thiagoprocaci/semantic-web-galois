@@ -8,10 +8,10 @@ import com.semanticweb.framework.module.web.IFlowController;
 public interface ISystemExceptionHandler  {
 
     public static final String MSG_ALREADY_COMMITED = "Response is already commited, so no redirection to an exception page can be made. "
-            + "This problem may have been caused due to an exception been thrown while a page bigger then the server output buffer was being rendered.\n\n";
-    public static final String MSG_ERROR_TICKET = "\n error ticket: ";
-    public static final String MSG_ERROR_ON_BARRIER = "\n ERROR on ExceptionBarrier, pleas see framework documentations: error ticket: ";
-    public static final String MSG_ERROR_AFTER_BARRIER = "\n ERROR after ExceptionBarrier, pleas see framework documentations: error ticket: ";
+            + "This problem may have been caused due to an exception been thrown while a page bigger then the server output buffer was being rendered.";
+    public static final String MSG_ERROR_TICKET = "error ticket: ";
+    public static final String MSG_ERROR_ON_BARRIER = " ERROR on ExceptionBarrier, please see framework documentations: error ticket: ";
+    public static final String MSG_ERROR_AFTER_BARRIER = " ERROR after ExceptionBarrier, pleas see framework documentations: error ticket: ";
     public static final String EXCEPTION_ERROR_CODE = "errorCode";
     /**
      * Processa o tratamento de uma excecao

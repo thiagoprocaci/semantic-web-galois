@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.BadPdfFormatException;
@@ -16,6 +19,7 @@ import com.semanticweb.framework.module.file.support.IFileTransformer;
  * Tranformador de arquivos
  */
 public class PdfFileTransformer implements IFileTransformer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PdfFileTransformer.class);
     private IFileNameGenerator fileNameGenerator;
     // pasta onde os arquivos pdfs serao gravados
     private String pdfFolder;
@@ -44,14 +48,11 @@ public class PdfFileTransformer implements IFileTransformer {
             pdfCopy.close();
             return new File(outFile);
         } catch (BadPdfFormatException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
+            LOGGER.error("error: " + e.getMessage());            
         } catch (DocumentException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
+            LOGGER.error("error: " + e.getMessage());
         } catch (IOException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
+            LOGGER.error("error: " + e.getMessage());
         }
         return null;
     }
@@ -74,14 +75,11 @@ public class PdfFileTransformer implements IFileTransformer {
             pdfCopy.close();
             return new File(outFile);
         } catch (BadPdfFormatException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
+            LOGGER.error("error: " + e.getMessage());
         } catch (DocumentException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
+            LOGGER.error("error: " + e.getMessage());
         } catch (IOException e) {
-            // TODO colocar log
-            System.out.println("error: " + e.getMessage());
+            LOGGER.error("error: " + e.getMessage());
         }
         return null;
     }

@@ -2,20 +2,23 @@ package com.semanticweb.framework.module.file.core;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.semanticweb.framework.module.file.IFileModule;
 import com.semanticweb.framework.module.file.support.IFileTransformer;
 import com.semanticweb.framework.module.file.support.ITextFileExtractor;
 
 /**
- *
+ * 
  * Modulo manipulador de arquivos pdf
- *
+ * 
  */
 public class PdfFileModule implements IFileModule {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PdfFileModule.class);
     private static final long serialVersionUID = 1L;
     private IFileTransformer fileTransformer;
     private ITextFileExtractor textFileExtractor;
-
 
     public void setTextFileExtractor(ITextFileExtractor textFileExtractor) {
         this.textFileExtractor = textFileExtractor;
@@ -38,7 +41,7 @@ public class PdfFileModule implements IFileModule {
      */
     @Override
     public File merge(String filePath1, String filePath2) {
-       return fileTransformer.merge(filePath1, filePath2);
+        return fileTransformer.merge(filePath1, filePath2);
     }
 
     /**
@@ -54,8 +57,6 @@ public class PdfFileModule implements IFileModule {
      */
     @Override
     public void initialize() {
-        // TODO log
+        LOGGER.info("initializing pdf file module");
     }
-
-
 }

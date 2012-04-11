@@ -36,9 +36,11 @@ public class SendErrorExceptionHandler implements ISystemExceptionHandler {
             if (flowController.isRequestCommitted()) {
                 // O log stacktrace abaixo eh desnecessario. Ficando disponivel
                 // apenas como warn
-                LOGGER.error(MSG_ALREADY_COMMITED + errorCode);
+                LOGGER.error(MSG_ALREADY_COMMITED);
+                LOGGER.error(MSG_ERROR_TICKET + errorCode);
                 LOGGER.warn("This is no real Bug. This stacktrace will only apear as WARN and can be ignored", exception);
             } else {
+                LOGGER.error(MSG_ERROR_TICKET + errorCode);
                 // seta protocolo e excecao lancada no request
                 flowController.getRequest().setAttribute(EXCEPTION, exception);
                 flowController.getRequest().setAttribute(PROTOCOLO, errorCode);

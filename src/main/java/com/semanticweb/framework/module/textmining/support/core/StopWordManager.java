@@ -6,12 +6,16 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.semanticweb.framework.module.textmining.support.IStopWordManager;
 
 /**
  * Manipulador das stop words
  */
 public class StopWordManager implements IStopWordManager {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StopWordManager.class);
     private String stopWordsFilePath;
     // cache das stop words
     private Set<String> stopWords;
@@ -40,8 +44,7 @@ public class StopWordManager implements IStopWordManager {
                     }
                 }
             } catch (FileNotFoundException e) {
-                // TODO colocar log
-                System.out.println("error: " + e.getMessage());
+                LOGGER.error("error: " + e.getMessage());
             }
         }
         return stopWords;
@@ -51,7 +54,7 @@ public class StopWordManager implements IStopWordManager {
      * {@inheritDoc}
      */
     @Override
-    public boolean isStopWord(String word) {       
+    public boolean isStopWord(String word) {
         return loadStopWords().contains(word);
     }
 }
