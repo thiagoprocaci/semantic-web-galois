@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Required;
 
 import com.semanticweb.framework.kernel.IApplicationSettings;
 
@@ -86,17 +85,14 @@ public class ApplicationSettings implements Serializable, IApplicationSettings {
         return appCode;
     }
 
-    @Required
     public void setAppCode(String appCode) {
         this.appCode = appCode;
     }
 
-    @Required
     public void setConfigSettings(String configSettings) {
         this.configSettings = configSettings;
     }
 
-    @Required
     public void setLogPath(String logPath) {
         this.logPath = logPath;
     }

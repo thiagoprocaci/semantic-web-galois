@@ -12,14 +12,6 @@ import javax.servlet.http.HttpServletRequest;
  * Interface do gerenciador de fluxo
  */
 public interface IFlowController {
-
-    /**
-     * Enum to tipo de request
-     */
-    public enum Type {
-        POST, GET;
-    }
-
     /**
      * Retorna o request uri
      *
@@ -28,33 +20,32 @@ public interface IFlowController {
     String getRequestURI();
 
     /**
-     * Retorna o uri de origem
-     *
-     * @return o uri de origem
-     */
-    String getOriginURI();
-
-    /**
      * Initilization Method for the Flow Controller
      *
-     * @param request o objeto request
-     * @param response o objeto response
+     * @param request
+     *            o objeto request
+     * @param response
+     *            o objeto response
      */
     void processRequest(ServletRequest request, ServletResponse response);
 
     /**
      * Redireciona para a url
      *
-     * @param url url do redirecionamento
-     * @throws IOException quando ocorre erro no redirecionamento
+     * @param url
+     *            url do redirecionamento
+     * @throws IOException
+     *             quando ocorre erro no redirecionamento
      */
     void sendRedirect(String url) throws IOException;
 
     /**
      * Redireciona para a pagina de error
      *
-     * @param arg codigo do erro
-     * @throws IOException quando ocorre erro no redirecionamento
+     * @param arg
+     *            codigo do erro
+     * @throws IOException
+     *             quando ocorre erro no redirecionamento
      */
     void sendError(int arg) throws IOException;
 
@@ -85,24 +76,20 @@ public interface IFlowController {
     HttpServletRequest getRequest();
 
     /**
-     * Informa se o request eh um refresh
-     *
-     * @return true se for um refresh
-     */
-    boolean isRefresh();
-
-    /**
      * Adiciona ou substitui uma chave/valor string no header
      *
-     * @param arg0 a chave
-     * @param arg1 o valor inteiro
+     * @param arg0
+     *            a chave
+     * @param arg1
+     *            o valor inteiro
      */
     void setHeader(String arg0, String arg1);
 
     /**
      * Informa se o header contem a chave
      *
-     * @param arg0 a chave a ser procurada no header
+     * @param arg0
+     *            a chave a ser procurada no header
      * @return true se a chave estiver no header
      */
     boolean containsHeader(String arg0);
@@ -110,58 +97,68 @@ public interface IFlowController {
     /**
      * Adiciona uma chave/valor inteiro no header
      *
-     * @param arg0 a chave
-     * @param arg1 o valor inteiro
+     * @param arg0
+     *            a chave
+     * @param arg1
+     *            o valor inteiro
      */
     void addIntHeader(String arg0, int arg1);
 
     /**
      * Adiciona uma chave/valor string no header
      *
-     * @param arg0 a chave
-     * @param arg1 o valor string
+     * @param arg0
+     *            a chave
+     * @param arg1
+     *            o valor string
      */
     void addHeader(String arg0, String arg1);
 
     /**
      * Adiciona um cookie
      *
-     * @param arg0 valor do cookie a ser adicionado
+     * @param arg0
+     *            valor do cookie a ser adicionado
      */
     void addCookie(Cookie arg0);
 
     /**
      * Seta o locale
      *
-     * @param arg0 locale a ser setado
+     * @param arg0
+     *            locale a ser setado
      */
     void setLocale(Locale arg0);
 
     /**
      * Seta o content type
      *
-     * @param arg0 content type a ser setado
+     * @param arg0
+     *            content type a ser setado
      */
     void setContentType(String arg0);
 
     /**
      * Seta o tamanho do content
      *
-     * @param arg0 tamanho a ser setado
+     * @param arg0
+     *            tamanho a ser setado
      */
     void setContentLength(int arg0);
 
     /**
      * Seta o charset
      *
-     * @param arg0 charset a ser setado
+     * @param arg0
+     *            charset a ser setado
      */
     void setCharacterEncoding(String arg0);
 
     /**
      * Seta o tamanho do buffer
      *
-     * @param arg0 tamanho a ser setado
+     * @param arg0
+     *            tamanho a ser setado
      */
     void setBufferSize(int arg0);
 
@@ -201,15 +198,18 @@ public interface IFlowController {
     /**
      * Adiciona uma chave/valor do tipo data ao header
      *
-     * @param arg0 a chave
-     * @param arg1 o valor
+     * @param arg0
+     *            a chave
+     * @param arg1
+     *            o valor
      */
     void addDateHeader(String arg0, long arg1);
 
     /**
      * Realiza o encode da url de direcionamento
      *
-     * @param arg0 a url a ser encodada
+     * @param arg0
+     *            a url a ser encodada
      * @return a url encodada
      */
     String encodeRedirectURL(String arg0);
@@ -217,7 +217,8 @@ public interface IFlowController {
     /**
      * Realiza o encode da url
      *
-     * @param arg0 a url a ser encodada
+     * @param arg0
+     *            a url a ser encodada
      * @return a url encodada
      */
     String encodeURL(String arg0);
@@ -225,23 +226,28 @@ public interface IFlowController {
     /**
      * Adiciona ou substitui uma chave/valor do tipo data ao header
      *
-     * @param arg0 a chave
-     * @param arg1 o valor
+     * @param arg0
+     *            a chave
+     * @param arg1
+     *            o valor
      */
     void setDateHeader(String arg0, long arg1);
 
     /**
      * Adiciona uma chave/valor inteiro ao header
      *
-     * @param arg0 a chave
-     * @param arg1 o valor inteiro
+     * @param arg0
+     *            a chave
+     * @param arg1
+     *            o valor inteiro
      */
     void setIntHeader(String arg0, int arg1);
 
     /**
      * Seta o status
      *
-     * @param arg0 o valor do status a ser setado
+     * @param arg0
+     *            o valor do status a ser setado
      */
     void setStatus(int arg0);
 

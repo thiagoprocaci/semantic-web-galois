@@ -10,6 +10,9 @@
 
 
    <properties>
+   		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+        <jdk.version>1.6</jdk.version>
+        <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
         <spring.version>3.1.1.RELEASE</spring.version>
         <logback.api.version>1.6.1</logback.api.version>
         <logback.impl.version>0.9.24</logback.impl.version>
@@ -26,6 +29,8 @@
         <commons-collections.version>3.2.1</commons-collections.version>
 
     </properties>
+
+
 
 
   <dependencies>
@@ -249,6 +254,10 @@
            <exclusion>
                <groupId>commons-collections</groupId>
                <artifactId>commons-collections</artifactId>
+           </exclusion>
+           <exclusion>
+           	   <groupId>commons-lang</groupId>
+        	   <artifactId>commons-lang</artifactId>
            </exclusion>
        </exclusions>
    </dependency>
@@ -612,7 +621,27 @@
           <downloadJavadocs>true</downloadJavadocs>
         </configuration>
       </plugin>
-    </plugins>
+      <!-- definição da versão do java e do encoding dos fontes -->
+       <plugin>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <version>2.3.2</version>
+         <configuration>
+             <source>${jdk.version}</source>
+             <target>${jdk.version}</target>
+             <encoding>${project.build.sourceEncoding}</encoding>
+         </configuration>
+       </plugin>
+      <!-- definição do encoding dos recursos -->
+      <plugin>
+           <artifactId>maven-resources-plugin</artifactId>
+           <version>2.4.3</version>
+           <configuration>
+              <encoding>${project.build.sourceEncoding}</encoding>
+           </configuration>
+      </plugin>
+
+  </plugins>
+
 
     <finalName>sematicweb</finalName>
   </build>

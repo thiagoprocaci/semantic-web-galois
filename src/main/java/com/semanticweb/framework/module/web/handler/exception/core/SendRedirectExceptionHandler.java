@@ -2,7 +2,6 @@ package com.semanticweb.framework.module.web.handler.exception.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Required;
 
 import com.semanticweb.framework.module.web.IFlowController;
 import com.semanticweb.framework.module.web.handler.exception.ISystemExceptionHandler;
@@ -41,7 +40,7 @@ public class SendRedirectExceptionHandler implements ISystemExceptionHandler {
         }
     }
 
-    @Required
+
     public void setErrorPage(String errorPage) {
         this.errorPage = errorPage;
     }
