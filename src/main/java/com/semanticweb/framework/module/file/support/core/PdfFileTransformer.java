@@ -48,7 +48,7 @@ public class PdfFileTransformer implements IFileTransformer {
             pdfCopy.close();
             return new File(outFile);
         } catch (BadPdfFormatException e) {
-            LOGGER.error("error: " + e.getMessage());            
+            LOGGER.error("error: " + e.getMessage());
         } catch (DocumentException e) {
             LOGGER.error("error: " + e.getMessage());
         } catch (IOException e) {

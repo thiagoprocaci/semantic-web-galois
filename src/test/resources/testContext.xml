@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- beans para testes de integracao.. cuidado quando for usa-los na aplicacao.. aqui os escopos de todos sao singleton.. -->
+	<!-- configuracoes do kernel -->
+
+	<bean id="settings" class="com.semanticweb.framework.kernel.core.ApplicationSettings" >
+        <property name="appCode" value="semanticWeb" />
+        <property name="configSettings" value="config_test" />
+    </bean>
+
+    <bean id="kernel" class="com.semanticweb.framework.kernel.core.Kernel">
+        <property name="settings" ref="settings" />
+    </bean>
+
+    <bean id="FrameworkInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" depends-on="kernel">
+        <property name="targetObject" ref="kernel" />
+        <property name="targetMethod" value="initialize" />
+    </bean>
+
+
+	<!-- web module -->
+    <bean id="frameworkFlowController" class="com.semanticweb.framework.module.web.core.FlowController"></bean>
+
+    <bean id="ticketGenerator" class="com.semanticweb.framework.module.web.handler.exception.core.TicketGenerator"></bean>
+
+    <bean id="exceptionBarrier" class="com.semanticweb.framework.module.web.core.ExceptionBarrier">
+        <property name="ticketGenerator" ref="ticketGenerator" />
+        <property name="systemExceptionHandlers">
+            <list>
+                <bean class="com.semanticweb.framework.module.web.handler.exception.core.SendErrorExceptionHandler" />
+                <bean class="com.semanticweb.framework.module.web.handler.exception.core.SendRedirectExceptionHandler" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="webModule" class="com.semanticweb.framework.module.web.core.WebModule">
+        <property name="flowController" ref="frameworkFlowController" />
+        <property name="exceptionBarrier" ref="exceptionBarrier" />
+    </bean>
+
+    <!-- file module -->
+
+    <bean id="pdfFileNameGenerator" class="com.semanticweb.framework.module.file.support.core.PdfFileNameGenerator" />
+
+    <bean id="pdfFileTransformer" class="com.semanticweb.framework.module.file.support.core.PdfFileTransformer" >
+    	<property name="fileNameGenerator" ref="pdfFileNameGenerator" />
+    	<property name="pdfFolder" value="" />
+    </bean>
+
+    <bean id="pdfTextFileExtractor" class="com.semanticweb.framework.module.file.support.core.PdfTextFileExtractor" />
+
+    <bean id="fileModule" class="com.semanticweb.framework.module.file.core.PdfFileModule">
+    	<property name="textFileExtractor" ref="pdfTextFileExtractor" />
+    	<property name="fileTransformer" ref="pdfFileTransformer" />
+    </bean>
+
+	<!-- text mining module -->
+
+	<bean id="stopWordManager" class="com.semanticweb.framework.module.textmining.support.core.StopWordManager" >
+		<property name="stopWordsFilePath" value="" />
+	</bean>
+
+	<bean id="luceneTextAnalyzer" class="com.semanticweb.framework.module.textmining.support.core.LuceneTextAnalyzer" >
+		<property name="analizerType" value="standard" />
+		<property name="stopWordManagerList">
+            <list>
+            	<ref bean="stopWordManager"/>
+            </list>
+        </property>
+	</bean>
+
+	<bean id="metadataAdvisor" class="com.semanticweb.framework.module.textmining.support.core.MetadataAdvisor">
+    	<property name="textAnalyzer" ref="luceneTextAnalyzer" />
+    </bean>
+
+
+	<bean id="textMiningModule" class="com.semanticweb.framework.module.textmining.core.TextMiningModule">
+    	<property name="metadataAdvisor" ref="metadataAdvisor" />
+    	<property name="fileModule" ref="fileModule" />
+    </bean>
+
+
+</beans>

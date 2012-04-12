@@ -1,7 +1,5 @@
 package com.semanticweb.framework.module.web;
 
-import java.awt.event.ActionEvent;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -40,19 +38,4 @@ public interface IWebModule extends IKernelModule {
      */
     IExceptionBarrier getExceptionBarrier();
 
-    /**
-     * Executado antes do tratamento do evento
-     *
-     * @param event
-     *            evendo a ser tratado
-     */
-    void notifyBeforeEventHandler(ActionEvent event);
-
-    /**
-     * Executado depois do tratamento do evento
-     *
-     * @param event
-     *            evendo a ser tratado
-     */
-    void notifyAfterEventHandler(ActionEvent event);
 }

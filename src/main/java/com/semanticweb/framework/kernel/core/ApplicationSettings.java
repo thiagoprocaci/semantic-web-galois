@@ -16,11 +16,11 @@ import com.semanticweb.framework.kernel.IApplicationSettings;
 public class ApplicationSettings implements Serializable, IApplicationSettings {
     private static final String LOG_PATH = "logpath";
     private static final long serialVersionUID = 5899548333825887211L;
-    private static final Logger LOG = LoggerFactory.getLogger(ApplicationSettings.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationSettings.class);
     private String logPath;
     private String appCode;
     // Referencia para o resourceBundle para o arquivo de configuracoes
-    private ResourceBundle config; //
+    private ResourceBundle config;
     private String configSettings;
 
     /**
@@ -39,11 +39,11 @@ public class ApplicationSettings implements Serializable, IApplicationSettings {
      * @return o bundle carregado
      */
     private ResourceBundle loadBundle(String bundleName) {
-        LOG.info("Starting config " + bundleName);
+        LOGGER.info("Starting config " + bundleName);
         try {
             return ResourceBundle.getBundle(bundleName);
         } catch (MissingResourceException e) {
-            LOG.error("Erro ao localizar arquivo: " + bundleName);
+            LOGGER.error("Erro ao localizar arquivo: " + bundleName);
         }
         return null;
     }
