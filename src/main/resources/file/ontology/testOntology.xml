@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+	<!-- cabecalho da ontologia -->
+
+	<owl:Ontology rdf:about="">
+		<rdfs:comment>Relacionamento entre segmentos de arquivos
+		</rdfs:comment>
+		<rdfs:label>Ontologia de segmentos</rdfs:label>
+	</owl:Ontology>
+
+	<owl:Class rdf:ID="Segment" />
+
+	<Segment rdf:ID="seg1">
+		<complements>
+			<Segment rdf:ID="seg2">
+			</Segment>
+		</complements>
+		<isBasisFor>
+			<Segment rdf:ID="seg3">
+			</Segment>
+		</isBasisFor>
+		<isPartOf>
+			<Segment rdf:ID="seg4">
+			</Segment>
+		</isPartOf>
+		<isSimilarTo>
+			<Segment rdf:ID="seg5">
+			</Segment>
+		</isSimilarTo>
+	</Segment>
+	<Segment rdf:ID="seg2">
+		<isPartOf>
+			<Segment rdf:ID="seg3">
+			</Segment>
+		</isPartOf>
+		<isPartOf>
+			<Segment rdf:ID="seg4">
+			</Segment>
+		</isPartOf>
+	</Segment>
+	<Segment rdf:ID="seg3">
+		<complements>
+			<Segment rdf:ID="seg4">
+			</Segment>
+		</complements>
+	</Segment>
+	<Segment rdf:ID="seg4">
+
+	</Segment>
+	<Segment rdf:ID="seg5">
+
+	</Segment>
+
+
+</rdf:RDF> 
+
