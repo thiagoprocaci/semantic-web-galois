@@ -14,6 +14,7 @@ public class FileUtil {
     public static final String ONTO_WS_FILE = "/files/OntoWS.pdf";
     public static final String A_TXT_FILE = "/files/a.txt";
     public static final String NAO_EH_PDF_FILE = "/files/naoEhPdf.pdf";
+    public static final String TEST_ONTOLOGY = "/file/ontology/testOntology.xml";
 
     /**
      * @param relativePath

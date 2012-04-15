@@ -1,9 +1,11 @@
 package com.semanticweb.galois.ontology.core;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class OWLBuilder implements IOntologyBuilder {
     private static final String RELATION = "rel_YYY";
     private ISegmentService segmentService;
     private ISegmentRelationService segmentRelationService;
+    
+    //TODO refatorar essa classe.. ela esta com muitas responsabilidades
 
     public void setSegmentService(ISegmentService segmentService) {
         this.segmentService = segmentService;
@@ -38,22 +42,47 @@ public class OWLBuilder implements IOntologyBuilder {
      * {@inheritDoc}
      */
     @Override
-    public void buildOntology() {
+    public File buildOntology() {
         List<Segment> segmentList = segmentService.findAll();
         if (segmentList != null && !segmentList.isEmpty()) {
             String instances = createInstances(segmentList);
             List<SegmentRelation> segmentRelationList = segmentRelationService.findAll();
             instances = createRelationship(segmentRelationList, instances);
             instances = removeEmptyRelation(segmentList, instances);
-            System.out.println(createOntology(instances));
+            instances = createOntology(instances);
+            String path = saveOntology(instances);
+            return new File(path);
         }
+        return null;
+    }
+
+    private String saveOntology(String ontology) {
+        try {
+            String path = getClass().getResource("/file/ontology/").getPath().toString();
+            path = path.replace("file:/", "");
+            path = path.replace("/", File.separator);
+            path = path + "ontology.xml";
+            // Create file
+            FileWriter fstream = new FileWriter(path);
+            BufferedWriter out = new BufferedWriter(fstream);
+            out.write(ontology);
+            // Close the output stream
+            out.close();
+            return path;
+        } catch (Exception e) {// TODO LOG
+            System.err.println("Error: " + e.getMessage());
+        }
+        return null;
     }
 
     /**
      * 
-     * @param segmentList lista de segmentos
-     * @param instances String com as instancias
-     * @return Retorna string sem os relacionamentos vazios usados durante a construcao do XML
+     * @param segmentList
+     *            lista de segmentos
+     * @param instances
+     *            String com as instancias
+     * @return Retorna string sem os relacionamentos vazios usados durante a
+     *         construcao do XML
      */
     private String removeEmptyRelation(List<Segment> segmentList, String instances) {
         for (Segment segment : segmentList) {
@@ -140,7 +169,8 @@ public class OWLBuilder implements IOntologyBuilder {
 
     /**
      * 
-     * @param instances string com as instancias
+     * @param instances
+     *            string com as instancias
      * @return Retorna ontologia com base nas instancias
      */
     private String createOntology(String instances) {

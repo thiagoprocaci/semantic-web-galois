@@ -1,5 +1,7 @@
 package com.semanticweb.galois.ontology;
 
+import java.io.File;
+
 
 /**
  * 
@@ -12,5 +14,5 @@ public interface IOntologyBuilder {
      * Constroi ontologia baseada na lista de segmentos
      * @param segmentList lista de segmentos
      */
-    void buildOntology();
+    File buildOntology();
 }

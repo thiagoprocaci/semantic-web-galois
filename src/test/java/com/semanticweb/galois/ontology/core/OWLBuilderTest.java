@@ -1,7 +1,9 @@
 package com.semanticweb.galois.ontology.core;
 
-import static org.mockito.Mockito.*;
-
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static junit.framework.Assert.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,6 +93,9 @@ public class OWLBuilderTest {
         
         when(segmentRelationService.findAll()).thenReturn(relationList);
         
-        owlBuilder.buildOntology();
+        File f = owlBuilder.buildOntology();
+        assertNotNull(f);
+        assertTrue(f.exists());
+        //TODO terminar esse teste
     }
 }

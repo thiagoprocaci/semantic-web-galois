@@ -32,10 +32,10 @@
 		</isSimilarTo>
 	</Segment>
 	<Segment rdf:ID="seg2">
-		<isPartOf>
+		<complements>
 			<Segment rdf:ID="seg3">
 			</Segment>
-		</isPartOf>
+		</complements>		
 		<isPartOf>
 			<Segment rdf:ID="seg4">
 			</Segment>
