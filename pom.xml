@@ -27,7 +27,8 @@
         <commons-io.version>2.1</commons-io.version>
         <commons-beanutils.version>1.8.3</commons-beanutils.version>
         <commons-collections.version>3.2.1</commons-collections.version>
-
+		<apache.mahout.version>0.6</apache.mahout.version>
+		<lucene.version>3.5.0</lucene.version>
     </properties>
 
 
@@ -35,7 +36,40 @@
 
   <dependencies>
   
-    <!-- jena -->
+  <!-- apache Mahout -->
+  
+    <dependency>
+      <groupId>org.apache.mahout</groupId>
+      <artifactId>mahout-core</artifactId>
+      <version>${apache.mahout.version}</version>
+      <exclusions>
+            <exclusion>
+                <artifactId>commons-logging</artifactId>
+                <groupId>commons-logging</groupId>
+            </exclusion>
+            <exclusion>
+                <artifactId>commons-beanutils</artifactId>
+                <groupId>commons-beanutils</groupId>
+            </exclusion>            
+        </exclusions>
+    </dependency>
+
+<!-- 
+    <dependency>
+      <groupId>org.apache.mahout</groupId>
+      <artifactId>mahout-math</artifactId>
+      <version>${apache.mahout.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.apache.mahout</groupId>
+      <artifactId>mahout-utils</artifactId>
+      <version>${apache.mahout.version}</version>
+    </dependency>  -->
+  
+  
+    <!-- jena 
 	<dependency>
 	  	<groupId>org.apache.jena</groupId>
 	  	<artifactId>jena-arq</artifactId>
@@ -46,7 +80,7 @@
                <artifactId>slf4j-api</artifactId>
            </exclusion>
        </exclusions>
-	</dependency>
+	</dependency> -->
 
 	<!-- Spring -->
      <dependency>
@@ -534,19 +568,19 @@
   	<dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-core</artifactId>
-      <version>3.5.0</version>
+      <version>${lucene.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-analyzers</artifactId>
-      <version>3.5.0</version>
+      <version>${lucene.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-queries</artifactId>
-      <version>3.5.0</version>
+      <version>${lucene.version}</version>
     </dependency>
 
      <!-- server libraries -->
@@ -651,6 +685,12 @@
            <configuration>
               <encoding>${project.build.sourceEncoding}</encoding>
            </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.4</version>        
       </plugin>
 
   </plugins>
